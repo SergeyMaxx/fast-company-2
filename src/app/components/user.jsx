@@ -1,6 +1,7 @@
 import React from 'react'
 import Qualities from './qualities'
 import Bookmark from './bookmark'
+import PropTypes from 'prop-types'
 
 const User = ({
                 _id,
@@ -13,6 +14,7 @@ const User = ({
                 bookmark,
                 onToggleBookMark
               }) => {
+
   return (
     <tr>
       <td>{name}</td>
@@ -25,8 +27,7 @@ const User = ({
       <td>
         <Bookmark
           status={bookmark}
-          onToggleBookMark={onToggleBookMark} // onClick={() => onToggleBookMark(id)
-          id={_id}                            // (не нужно)
+          onClick={() => onToggleBookMark(_id)} // onToggleBookMark={onToggleBookMark} and id={_id}
         />
       </td>
       <td>
@@ -36,6 +37,18 @@ const User = ({
       </td>
     </tr>
   )
+}
+
+User.propTypes = {
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  qualities: PropTypes.array,
+  profession: PropTypes.object.isRequired,
+  completedMeetings: PropTypes.number.isRequired,
+  rate: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  bookmark: PropTypes.bool,
+  onToggleBookMark: PropTypes.func.isRequired
 }
 
 export default User

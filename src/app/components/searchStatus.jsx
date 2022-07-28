@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const SearchStatus = ({length}) => {
   const renderPhrase = number => {
@@ -14,6 +15,10 @@ const SearchStatus = ({length}) => {
       </span>
     </h2>
   )
+}
+
+SearchStatus.propTypes = {
+  length: PropTypes.number
 }
 
 export default SearchStatus
