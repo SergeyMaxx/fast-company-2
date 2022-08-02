@@ -14,7 +14,6 @@ const User = ({
                 bookmark,
                 onToggleBookMark
               }) => {
-
   return (
     <tr>
       <td>{name}</td>
