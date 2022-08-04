@@ -121,7 +121,7 @@ const users = [
 ]
 
 const fetchAllUsers = () => new Promise(resolve => {
-  setTimeout(() => resolve(users), 2000)
+  setTimeout(() => resolve(users), 1000)
 })
 
 export default fetchAllUsers

@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
-
-const Bookmark = ({status, ...rest}) => { // ({status,  onToggleBookMark, id}) or ({status, onClick})
+const Bookmark = ({status, ...rest}) => {
   return (
-    <button {...rest}> {/*<button onClick={() => onToggleBookMark(_id)} or <button onClick={onClick}>  */}
+    <button {...rest}>
       <i className={'bi bi-bookmark' + (status ? '-fill' : '')}/>
     </button>
   )
