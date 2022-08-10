@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import Login from './layouts/login'
 import Main from './layouts/main'
 import NavBar from './components/navBar'
-import Users from './components/users'
+import Users from './layouts/users'
 
 const App = () => (
   <div>
