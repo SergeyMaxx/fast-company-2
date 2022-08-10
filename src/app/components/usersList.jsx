@@ -8,18 +8,16 @@ import SearchStatus from './searchStatus'
 import UsersTable from './usersTable'
 import _ from 'lodash'
 
-const Users2 = () => {
+const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [professions, setProfessions] = useState(null)
   const [selectedProf, setSelectedProf] = useState()
   const [sortBy, setSortBy] = useState({path: 'name', order: 'asc'})
-
+  const [users, setUsers] = useState(null)
   const pageSize = 8
 
-  const [users, setUsers] = useState(null)
-
   useEffect(() => {
-    api.fetchAllUsers().then(data => setUsers(data))
+    api.users.fetchAll().then(data => setUsers(data))
   }, [])
 
   const handleDelete = userId => {
@@ -102,8 +100,8 @@ const Users2 = () => {
   return 'loading...'
 }
 
-Users2.propTypes = {
+UsersList.propTypes = {
   users: PropTypes.array
 }
 
-export default Users2
+export default UsersList
