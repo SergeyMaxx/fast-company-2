@@ -3,10 +3,14 @@ import {validator} from '../../utils/validator'
 import TextField from '../common/form/textField'
 
 const LoginForm = () => {
-  const [data, setData] = useState({email: '', password: ''})
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    stayOn: false
+  })
   const [errors, setErrors] = useState({})
 
-  const handleChange = ({target}) => {
+  const handleChange = target => {
     setData(prevState => ({
       ...prevState,
       [target.name]: target.value
@@ -48,39 +52,32 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-6 offset-md3 shadow p-4">
-          <h3 className="mb-4">Login</h3>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="E-mail"
-              name="email"
-              value={data.email}
-              onChange={handleChange}
-              placeholder="enter E-mail"
-              error={errors.email}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              name="password"
-              value={data.password}
-              onChange={handleChange}
-              placeholder="enter password"
-              error={errors.password}
-            />
-            <button
-              type="submit"
-              disabled={isValid}
-              className="btn btn-primary w-100 mx-auto"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="E-mail"
+        name="email"
+        value={data.email}
+        onChange={handleChange}
+        placeholder="enter Email"
+        error={errors.email}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        name="password"
+        value={data.password}
+        onChange={handleChange}
+        placeholder="enter password"
+        error={errors.password}
+      />
+      <button
+        type="submit"
+        disabled={isValid}
+        className="btn btn-primary w-100 mx-auto"
+      >
+        Submit
+      </button>
+    </form>
   )
 }
 

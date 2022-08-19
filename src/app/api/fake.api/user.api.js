@@ -1,18 +1,18 @@
 import {professionsObject as professions} from './professions.api'
 
 const qualities = {
-  tedious: {_id: '67rdca3eeb7f6fgeed471198', name: 'Нудила', color: 'primary'},
-  strange: {_id: '67rdca3eeb7f6fgeed471100', name: 'Странный', color: 'secondary'},
-  bullet: {_id: '67rdca3eeb7f6fgeed4711012', name: 'Тролль', color: 'success'},
-  alcoholic: {_id: '67rdca3eeb7f6fgeed471101', name: 'Алкоголик', color: 'danger'},
-  handsome: {_id: '67rdca3eeb7f6fgeed471102', name: 'Красавчик', color: 'info'},
-  uncertain: {_id: '67rdca3eeb7f6fgeed471103', name: 'Неуверенный', color: 'dark'}
+  tedious: {_id: '67rdca3eeb7f6fgeed471198', name: 'Tedious', color: 'primary'},
+  strange: {_id: '67rdca3eeb7f6fgeed471100', name: 'Strange', color: 'secondary'},
+  bullet: {_id: '67rdca3eeb7f6fgeed4711012', name: 'Bullet', color: 'success'},
+  alcoholic: {_id: '67rdca3eeb7f6fgeed471101', name: 'Alcoholic', color: 'danger'},
+  handsome: {_id: '67rdca3eeb7f6fgeed471102', name: 'Handsome', color: 'info'},
+  uncertain: {_id: '67rdca3eeb7f6fgeed471103', name: 'Uncertain', color: 'dark'}
 }
 
 const users = [
   {
     _id: '67rdca3eeb7f6fgeed471815',
-    name: 'Джон Дориан',
+    name: 'John Dorian',
     profession: professions.doctor,
     qualities: [qualities.tedious, qualities.uncertain, qualities.strange],
     completedMeetings: 36,
@@ -21,7 +21,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471816',
-    name: 'Кокс',
+    name: 'Koks',
     profession: professions.doctor,
     qualities: [qualities.bullet, qualities.handsome, qualities.alcoholic],
     completedMeetings: 15,
@@ -30,7 +30,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471817',
-    name: 'Боб Келсо',
+    name: 'Bob Kelso',
     profession: professions.doctor,
     qualities: [qualities.bullet],
     completedMeetings: 247,
@@ -39,7 +39,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471818',
-    name: 'Рэйчел Грин',
+    name: 'Rachel Green',
     profession: professions.waiter,
     qualities: [qualities.uncertain],
     completedMeetings: 148,
@@ -48,7 +48,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471819',
-    name: 'Шелдон Купер',
+    name: 'Sheldon Cooper',
     profession: professions.physics,
     qualities: [qualities.strange, qualities.tedious],
     completedMeetings: 37,
@@ -57,7 +57,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471820',
-    name: 'Леонард Хофстедтер',
+    name: 'Leonard Hofstadter',
     profession: professions.physics,
     qualities: [qualities.strange, qualities.uncertain],
     completedMeetings: 147,
@@ -66,7 +66,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471821',
-    name: 'Говард Воловиц',
+    name: 'Howard Wolowitz',
     profession: professions.engineer,
     qualities: [qualities.strange, qualities.tedious],
     completedMeetings: 72,
@@ -75,7 +75,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471822',
-    name: 'Никола Тесла',
+    name: 'Nikola Tesla',
     profession: professions.engineer,
     qualities: [qualities.handsome],
     completedMeetings: 72,
@@ -84,7 +84,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471823',
-    name: 'Моника Геллер',
+    name: 'Monica Geller',
     profession: professions.cook,
     qualities: [qualities.strange, qualities.uncertain],
     completedMeetings: 17,
@@ -93,7 +93,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed471824',
-    name: 'Рататуй',
+    name: 'Ratatouille',
     profession: professions.cook,
     qualities: [qualities.handsome, qualities.bullet],
     completedMeetings: 17,
@@ -102,7 +102,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed47181f',
-    name: 'Джоуи Триббиани',
+    name: 'Joey Tribbiani',
     profession: professions.actor,
     qualities: [qualities.uncertain, qualities.strange],
     completedMeetings: 434,
@@ -111,7 +111,7 @@ const users = [
   },
   {
     _id: '67rdca3eeb7f6fgeed47181r',
-    name: 'Брэд Питт',
+    name: 'Brad Pitt',
     profession: professions.actor,
     qualities: [qualities.handsome],
     completedMeetings: 434,
@@ -120,15 +120,32 @@ const users = [
   },
 ]
 
-const getById = id => new Promise(resolve => {
-  setTimeout(() => resolve(users.find(user => user._id === id)), 1000)
-})
+if (!localStorage.getItem('users')) {
+  localStorage.setItem('users', JSON.stringify(users))
+}
 
 const fetchAll = () => new Promise(resolve => {
-  setTimeout(() => resolve(users), 1000)
+  setTimeout(() => resolve(JSON.parse(localStorage.getItem('users'))), 1000)
+})
+
+const update = (id, data) => new Promise(resolve => {
+  const users = JSON.parse(localStorage.getItem('users'))
+  const userIndex = users.findIndex(u => u._id === id)
+  users[userIndex] = {...users[userIndex], ...data}
+  localStorage.setItem('users', JSON.stringify(users))
+  resolve(users[userIndex])
+})
+
+const getById = id => new Promise(resolve => {
+  setTimeout(() => {
+    resolve(JSON.parse(localStorage.getItem('users')).find(user => {
+      return user._id === id
+    }), 1000)
+  })
 })
 
 export default {
   fetchAll,
-  getById
+  getById,
+  update
 }

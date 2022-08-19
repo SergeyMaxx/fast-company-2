@@ -9,19 +9,19 @@ const UsersTable = ({users, onSort, selectedSort, onToggleBookMark, onDelete}) =
   const columns = {
     name: {
       path: 'name',
-      name: 'Имя',
+      name: 'Name',
       component: user => <Link to={`/users/${user._id}`}>{user.name}</Link>
     },
     qualities: {
-      name: 'Качества',
+      name: 'Qualities',
       component: user => <QualitiesList qualities={user.qualities}/>
     },
-    professions: {path: 'profession.name', name: 'Профессия'},
-    completedMeetings: {path: 'completedMeetings', name: 'Встретился, раз'},
-    rate: {path: 'rate', name: 'Оценка'},
+    professions: {path: 'profession.name', name: 'Profession'},
+    completedMeetings: {path: 'completedMeetings', name: 'Completed meetings'},
+    rate: {path: 'rate', name: 'Rate'},
     bookmark: {
       path: 'bookmark',
-      name: 'Избранное',
+      name: 'Bookmark',
       component: user => (
         <Bookmark
           status={user.bookmark}

@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 const SearchStatus = ({length}) => {
   const renderPhrase = number => {
-    return number > 1 && number < 5 ? 'человека тусанут' : 'человек тусанёт'
+    return number > 1 && number < 5 ? 'person will hangs out' : 'people will hang out'
   }
 
   return (
     <h2>
       <span className={'badge bg-' + (length > 0 ? 'primary' : 'danger')}>
         {length > 0
-          ? `${length} ${renderPhrase(length)} с тобой сегодня`
-          : 'Никто с тобой не тусанёт'}
+          ? `${length} ${renderPhrase(length)} with you today`
+          : 'Nobody hangs out with you'}
       </span>
     </h2>
   )
