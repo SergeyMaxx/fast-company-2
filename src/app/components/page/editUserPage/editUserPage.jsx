@@ -6,6 +6,7 @@ import TextField from '../../common/form/textField'
 import SelectField from '../../common/form/selectField'
 import RadioField from '../../common/form/radioField'
 import MultiSelectField from '../../common/form/multiSelectField'
+import BackHistoryButton from '../../common/backButton'
 
 const EditUserPage = () => {
   const {userId} = useParams()
@@ -141,6 +142,7 @@ const EditUserPage = () => {
 
   return (
     <div className="container mt-5">
+      <BackHistoryButton/>
       <div className="row">
         <div className="col-md-6 offset-md-3 shadow p-4">
           {!isLoading && Object.keys(professions).length > 0
@@ -152,7 +154,7 @@ const EditUserPage = () => {
                   value={data.name}
                   onChange={handleChange}
                   error={errors.name}
-                  placeholder='enter Name'
+                  placeholder="enter Name"
                 />
                 <TextField
                   label="E-mail"
@@ -160,7 +162,7 @@ const EditUserPage = () => {
                   value={data.email}
                   onChange={handleChange}
                   error={errors.email}
-                  placeholder='enter Email'
+                  placeholder="enter Email"
                 />
                 <SelectField
                   label="Choose your profession"
