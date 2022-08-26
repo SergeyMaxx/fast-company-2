@@ -167,7 +167,7 @@ const EditUserPage = () => {
                 <SelectField
                   label="Choose your profession"
                   defaultOption="Choose..."
-                  professions={professions}
+                  options={professions}
                   name="profession"
                   onChange={handleChange}
                   value={data.profession}

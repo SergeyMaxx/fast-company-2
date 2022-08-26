@@ -139,7 +139,7 @@ const RegisterForm = () => {
         label="Choose your profession"
         defaultOption="Choose..."
         name="professions"
-        professions={professions}
+        options={professions}
         onChange={handleChange}
         value={data.professions}
         error={errors.professions}

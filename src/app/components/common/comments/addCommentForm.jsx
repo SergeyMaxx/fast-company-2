@@ -65,7 +65,7 @@ const AddCommentForm = ({onSubmit}) => {
       <form onSubmit={handleSubmit}>
         <SelectField
           onChange={handleChange}
-          professions={arrayOfUsers}
+          options={arrayOfUsers}
           name="userId"
           value={data.userId}
           defaultOption="Choose user"

@@ -6,7 +6,7 @@ const SelectField = ({
                        value,
                        onChange,
                        defaultOption,
-                       professions,
+                       options,
                        error,
                        name,
                      }) => {
@@ -15,9 +15,9 @@ const SelectField = ({
     onChange({name: target.name, value: target.value})
   }
 
-  const professionsArray = !Array.isArray(professions) && typeof professions === 'object'
-    ? Object.values(professions)
-    : professions
+  const professionsArray = !Array.isArray(options) && typeof options === 'object'
+    ? Object.values(options)
+    : options
 
   return (
     <div className="mb-4">
@@ -51,7 +51,7 @@ SelectField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   error: PropTypes.string,
-  professions: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   name: PropTypes.string
 }
 
