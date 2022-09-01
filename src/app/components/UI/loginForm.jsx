@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {validator} from '../../utils/validator'
 import TextField from '../common/form/textField'
+import {useAuth} from '../../hooks/useAuth'
+import {useHistory} from 'react-router-dom'
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -8,28 +10,26 @@ const LoginForm = () => {
     password: '',
     stayOn: false
   })
+
+  const history = useHistory()
+  const {signIn} = useAuth()
   const [errors, setErrors] = useState({})
+  const [enterError, setEnterError] = useState(null)
 
   const handleChange = target => {
     setData(prevState => ({
       ...prevState,
       [target.name]: target.value
     }))
+    setEnterError(null)
   }
 
   const validatorConfig = {
     email: {
       isRequired: {message: 'E-mail is required'},
-      isEmail: {message: 'email entered incorrectly'}
     },
     password: {
       isRequired: {message: 'Password is required'},
-      isCapitalSymbol: {message: 'password must contain a capital letter'},
-      isContainDigit: {message: 'password must contain a number'},
-      min: {
-        message: 'password must contain at least 8 characters',
-        value: 8
-      }
     }
   }
 
@@ -45,10 +45,16 @@ const LoginForm = () => {
 
   const isValid = Object.keys(errors).length !== 0
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     if (validate()) return
-    console.log(data)
+
+    try {
+      await signIn(data)
+      history.push('/')
+    } catch (error) {
+      setEnterError(error.message)
+    }
   }
 
   return (
@@ -70,9 +76,10 @@ const LoginForm = () => {
         placeholder="enter password"
         error={errors.password}
       />
+      {enterError && <p className='text-danger'>{enterError}</p>}
       <button
         type="submit"
-        disabled={isValid}
+        disabled={isValid || enterError}
         className="btn btn-primary w-100 mx-auto"
       >
         Submit
