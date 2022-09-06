@@ -12,7 +12,7 @@ const LoginForm = () => {
   })
 
   const history = useHistory()
-  const {signIn} = useAuth()
+  const {login} = useAuth()
   const [errors, setErrors] = useState({})
   const [enterError, setEnterError] = useState(null)
 
@@ -50,8 +50,13 @@ const LoginForm = () => {
     if (validate()) return
 
     try {
-      await signIn(data)
-      history.push('/')
+      await login(data)
+      history.push(
+        history.location.state
+          ? history.location.state.from.pathname
+          : '/'
+      )
+
     } catch (error) {
       setEnterError(error.message)
     }
@@ -76,7 +81,7 @@ const LoginForm = () => {
         placeholder="enter password"
         error={errors.password}
       />
-      {enterError && <p className='text-danger'>{enterError}</p>}
+      {enterError && <p className="text-danger">{enterError}</p>}
       <button
         type="submit"
         disabled={isValid || enterError}

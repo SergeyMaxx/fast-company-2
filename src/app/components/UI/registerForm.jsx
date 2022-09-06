@@ -17,6 +17,7 @@ const RegisterForm = () => {
     password: '',
     professions: '',
     sex: 'male',
+    name: '',
     qualities: [],
     licence: false
   })
@@ -44,14 +45,21 @@ const RegisterForm = () => {
   const validatorConfig = {
     email: {
       isRequired: {message: 'Email is required'},
-      isEmail: {message: 'email entered incorrectly'}
+      isEmail: {message: 'Email entered incorrectly'}
+    },
+    name: {
+      isRequired: {message: 'Name is required'},
+      min: {
+        message: 'Name must contain at least 3 characters',
+        value: 3
+      }
     },
     password: {
       isRequired: {message: 'Password is required'},
-      isCapitalSymbol: {message: 'password must contain a capital letter'},
-      isContainDigit: {message: 'password must contain a number'},
+      isCapitalSymbol: {message: 'Password must contain a capital letter'},
+      isContainDigit: {message: 'Password must contain a number'},
       min: {
-        message: 'password must contain at least 8 characters',
+        message: 'Password must contain at least 8 characters',
         value: 8
       }
     },
@@ -100,6 +108,14 @@ const RegisterForm = () => {
         error={errors.email}
       />
       <TextField
+        label="Name"
+        name="name"
+        value={data.name}
+        onChange={handleChange}
+        placeholder="Enter your name"
+        error={errors.name}
+      />
+      <TextField
         label="Password"
         type="password"
         name="password"
@@ -129,7 +145,7 @@ const RegisterForm = () => {
         label="Choose your sex"
       />
       <MultiSelectField
-        qualities={qualitiesList}
+        options={qualitiesList}
         onChange={handleChange}
         defaultValue={data.qualities}
         name="qualities"

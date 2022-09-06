@@ -4,8 +4,6 @@ import useMockData from '../utils/mockData'
 const Main = () => {
   const {error, initialize, progress, status} = useMockData()
 
-  const handleClick = () => initialize()
-
   return (
     <div className="container mt-5">
       <h1>Main Page</h1>
@@ -15,7 +13,8 @@ const Main = () => {
         <li>Progress: {progress}%</li>
         {error && <li>Error: {error}</li>}
       </ul>
-      <button className="btn btn-primary" onClick={handleClick}>
+      <button className="btn btn-primary" onClick={() => initialize()}>
+        {' '}
         Initialize
       </button>
     </div>
